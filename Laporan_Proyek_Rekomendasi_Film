@@ -1,8 +1,12 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Luissandro Hermawan
 
 ## Project Overview
 
-Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+Industri hiburan digital telah mengalami pertumbuhan yang sangat pesat dalam beberapa tahun terakhir, terutama dengan munculnya berbagai platform streaming film seperti Netflix, Amazon Prime Video, Hulu, dan HBO Max. Lonjakan jumlah film yang tersedia di platform ini memberi pengguna lebih banyak pilihan, tetapi juga membawa masalah baru: kesulitan menemukan film yang sesuai dengan preferensi pribadi.  Akibatnya, pengguna sering menghabiskan banyak waktu untuk mencari film yang ingin ditonton, yang pada akhirnya dapat menyebabkan mereka tidak lagi puas dengan layanan streaming.Untuk mengatasi permasalahan ini, banyak platform streaming mengadopsi sistem rekomendasi sebagai solusi utama dalam membantu pengguna menemukan film yang relevan dengan minat mereka. Salah satu pendekatan yang umum digunakan adalah Content-Based Filtering, yaitu metode yang memberikan rekomendasi berdasarkan fitur-fitur konten dari film yang telah disukai atau ditonton oleh pengguna sebelumnya. Dalam konteks ini, fitur-fitur seperti genre, judul, deskripsi, dan aktor dapat dimanfaatkan untuk mengukur kemiripan antar film. Sistem Rekomendasi Dataset Film, yang dapat diakses melalui Kaggle dan diunggah oleh Parasharmanas, digunakan untuk membangun sistem rekomendasi berbasis konten. Fondasi data yang tepat diberikan oleh set data ini, yang terdiri dari dua file utama:
+movies.csv: berisi metadata film seperti ID, judul, dan genre, yang berguna dalam mengekstrak fitur konten untuk analisis kesamaan antar film.
+ratings.csv: berisi data rating dari pengguna terhadap film, yang meskipun bukan komponen utama dalam Content-Based Filtering, tetap dapat dimanfaatkan untuk evaluasi performa sistem rekomendasi yang dibangun.
+Oleh karena itu, tujuan proyek ini adalah untuk membuat sistem rekomendasi berbasis konten yang efektif dan efisien yang memanfaatkan kekayaan data dari dataset Kaggle untuk membantu pengguna mengatasi kebingungan saat memilih film di antara banyaknya pilihan yang tersedia.
+
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - Jelaskan mengapa dan bagaimana masalah tersebut harus diselesaikan
