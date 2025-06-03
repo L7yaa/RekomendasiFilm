@@ -30,7 +30,9 @@ Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
 
 ## Data Understanding
 Dataset Movie Recommendation System oleh pengguna Kaggle parasharmanas menggunakan data dari MovieLens, yang merupakan salah satu dataset paling terkenal dalam pengembangan sistem rekomendasi. Dataset ini mencakup berbagai informasi penting seperti peringkat film, metadata film, dan data pengguna, yang memungkinkan pengembangan model rekomendasi berbasis pembelajaran mesin. Dataset ini sangat cocok untuk eksperimen dengan berbagai pendekatan seperti filtering kolaboratif, filtering berbasis konten, dan metode hibrida. MovieLens adalah sistem rekomendasi berbasis web dan komunitas virtual yang merekomendasikan film kepada pengguna berdasarkan preferensi mereka menggunakan filtering kolaboratif dari peringkat dan ulasan film anggota. Dataset ini mencakup sekitar 11 juta peringkat untuk sekitar 8.500 film. MovieLens dibuat pada tahun 1997 oleh GroupLens Research, sebuah laboratorium penelitian di Departemen Ilmu Komputer dan Teknik di Universitas Minnesota, untuk mengumpulkan data penelitian tentang rekomendasi yang dipersonalisasi. Dikarenakan Dataset yang terlalu besar saya memutuskan untuk menggunakan teknik index slicing dengan mengambil 10.000 data.
+
 [Kaggle] - (https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system)
+
 Seluruh variabel dari dua data :
 1. Data Movie
 movieId (int64): ID unik setiap film.
