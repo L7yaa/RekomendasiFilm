@@ -34,7 +34,7 @@ Dataset Movie Recommendation System oleh pengguna Kaggle parasharmanas menggunak
 Seluruh variabel dari dua data :
 1. Data Movie
 movieId (int64): ID unik setiap film.
-title (object): Judul film beserta tahun rilis (misalnya Toy Story (1995)).
+title (object): Judul film beserta tahun rilis (misalnya Snow Day (2000)).
 genres (object): Genre film yang bisa terdiri dari satu atau lebih kategori yang dipisahkan dengan tanda | (misalnya Animation|Children|Comedy).
 2. Data Rating
 userId (int64): ID unik pengguna yang memberikan rating.
@@ -42,25 +42,31 @@ movieId (int64): ID film yang dirating.
 rating (float64): Nilai rating, kemungkinan dalam skala 0.5–5.0.
 timestamp (int64): Waktu rating diberikan, dalam format UNIX timestamp.
 
+![image](https://github.com/user-attachments/assets/68d98765-ac2d-40cc-bef6-4a7b45cc0526)
+
 Data film dan data rating adalah dua komponen utama Sistem Saran Dataset Film. Data film mengandung 10.000 entri dengan tiga kolom: movieId, title, dan genres. Terdapat 9.999 judul film unik dan 780 kombinasi genre, dengan genre terbanyak adalah Drama, yang muncul 1.703 kali. Identitas film berkisar antara 1 dan 33.779. Sementara itu, data penilaian juga berisi 10.000 entri dengan kolom userId, movieId, penilaian, dan tanggal. 75 pengguna memberikan penilaian, dengan nilai berkisar antara 0,5 dan 5,0, dengan penilaian rata-rata 3,60. Timestamp menunjukkan waktu rating dalam format UNIX.
 
 
 ## Data Preparation
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
-
 - Melakukan penggabungan Data Movies dan Ratings 
 Untuk menggabungkan informasi genre film ke dalam data rating, dilakukan proses merger antara ratings_df dan movies_df berdasarkan kolom movieId. Proses ini menghasilkan dataframe baru bernama movie_ratings_df yang mengandung informasi rating pengguna serta genre dari setiap film yang dinilai. Untuk analisis lebih lanjut, seperti mengevaluasi preferensi genre pengguna atau membuat sistem rekomendasi berbasis konten.
 - Melakukan Pengecekkan data setelah penggabungan dan statistik Deskriptif data
 Setelah kolom movieId digunakan untuk menggabungkan data rating dan genre film, dataframe movie_ratings_df dihasilkan, yang mengandung semua rating pengguna dan genre untuk setiap film yang dinilai. Dari 10.000 entri, 8.194 memiliki informasi genre yang valid, menurut hasil deskriptif. Drama adalah genre yang paling sering muncul, dengan 597 kali. Dengan rating rata-rata 3,60 dan nilai rating yang tersebar antara 0,5 dan 5,0, data ini sangat penting untuk memahami preferensi genre pengguna.
+
+![image](https://github.com/user-attachments/assets/f41b4344-fd4a-4aa5-bded-2e56f0a109d6)  ![image](https://github.com/user-attachments/assets/52a66448-6d21-413c-b3da-8b15395ec61b)
 - Melakukan Pengecekkan missing value
 Selama proses pembersihan data, nilai yang hilang diidentifikasi pada dataframe movie_ratings_df. Hasilnya menunjukkan bahwa kolom genre mengandung 1.806 nilai kosong, sementara kolom lain, seperti userId, movieId, rating, dan timestamp, tidak memiliki nilai yang hilang. Untuk menjaga kualitas dan konsistensi data, baris-baris dalam kolom genres yang memiliki nilai kosong dihapus menggunakan fungsi dropna(). Setelah langkah ini selesai, jumlah nilai yang tidak ada pada seluruh kolom menjadi nol. Ini menunjukkan bahwa data sudah bersih dan siap untuk digunakan untuk analisis atau pelatihan model yang disarankan.
+![image](https://github.com/user-attachments/assets/4967d68c-1360-430f-afd6-b253627833f8)
 - Melakukan Pengecekkan Duplikat data
 Pada dataframe movie_ratings_df, pengecekan dan penghapusan duplikat dilakukan dengan menggunakan fungsi drop_duplicates(), untuk memastikan bahwa tidak ada baris duplikat dalam data yang dapat memengaruhi hasil analisis. Setiap entri dalam dataset adalah unik, karena jumlah baris sebelum dan sesudah proses ini tetap 10.000 baris. Sebelum masuk ke tahap analisis atau pemodelan lebih lanjut, langkah ini sangat penting untuk menjamin integritas data.
+![image](https://github.com/user-attachments/assets/be2dfea6-46e5-4c56-a686-2acc396855c7)
 - Pengecekkan data
 Lihat Jenis Data dalam Setiap Kolom.Pertama, setiap kolom dalam dataset diperiksa untuk memastikan bahwa data dalam kolom tersebut sesuai dengan tipe data yang diharapkan. Hasil pengecekan tipe data kolom ini adalah sebagai berikut: userId: int64, MovieId: int64, rating: float64, timestamp: int64, genres: object. Untuk memastikan bahwa kolom yang seharusnya berisi data numerik memiliki tipe data numerik yang tepat, tipe data userId, movieId, dan rating diubah menjadi int dan float sesuai kebutuhan.
+![image](https://github.com/user-attachments/assets/a47f97a9-f079-4ca3-a3d4-0b672cf2a51a)
 - Pengecekkan Data Setelah Pembersihan
-Setelah pembersihan data selesai, beberapa baris pertama dari dataset diperiksa menggunakan head(). Ini menunjukkan bahwa pembersihan data telah dilakukan dengan baik dan data siap untuk analisis lebih lanjut. Setelah data dibersihkan, statistik deskriptif dihitung untuk mengetahui bagaimana nilai tersebar di setiap kolom. Ringkasan statistik deskriptif berikut: Jumlah menunjukkan berapa banyak data yang tersedia untuk setiap kolom. Kolom numerik seperti rating, userId, dan movieId disebut mean. Standar deviasi digunakan untuk menunjukkan perbedaan data. Min/Max: Nilai minimum dan maksimum untuk menunjukkan luas data. Dari statistik deskriptif ini, terlihat bahwa distribusi rating dan ID memiliki nilai yang terdistribusi dengan baik. Selain itu, beberapa kolom menunjukkan nilai NaN, yang menunjukkan bahwa mungkin ada perluasan analisis lebih lanjut di tahap berikutnya. Sebagai langkah terakhir dalam pembersihan data, duplikat pada kolom title (judul film) dihapus dengan menggunakan fungsi drop_duplicates(). 
-
+Setelah pembersihan data selesai, beberapa baris pertama dari dataset diperiksa menggunakan head(). Ini menunjukkan bahwa pembersihan data telah dilakukan dengan baik dan data siap untuk analisis lebih lanjut. Setelah data dibersihkan, statistik deskriptif dihitung untuk mengetahui bagaimana nilai tersebar di setiap kolom. Ringkasan statistik deskriptif berikut: Jumlah menunjukkan berapa banyak data yang tersedia untuk setiap kolom. Kolom numerik seperti rating, userId, dan movieId disebut mean. Standar deviasi digunakan untuk menunjukkan perbedaan data. Min/Max: Nilai minimum dan maksimum untuk menunjukkan luas data. Dari statistik deskriptif ini, terlihat bahwa distribusi rating dan ID memiliki nilai yang terdistribusi dengan baik. Selain itu, beberapa kolom menunjukkan nilai NaN, yang menunjukkan bahwa mungkin ada perluasan analisis lebih lanjut di tahap berikutnya. Sebagai langkah terakhir dalam pembersihan data, duplikat pada kolom title (judul film) dihapus dengan menggunakan fungsi drop_duplicates().
+![image](https://github.com/user-attachments/assets/4decc856-7068-46a5-9108-2710391c587f)
 
 ## Modeling
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
@@ -68,8 +74,11 @@ Menggunakan TfidfVectorizer untuk Menghitung Representasi Genre
 Pada langkah ini, TfidfVectorizer digunakan untuk mengubah kolom genre dalam dataset menjadi representasi numerik yang dapat digunakan untuk analisis lebih lanjut. Teknik ini adalah teknik yang sering digunakan dalam pengolahan teks, mengubah teks menjadi vektor yang dikalibrasi dengan frekuensi kata dalam seluruh dataset, sehingga membantu menentukan pentingnya setiap kata yang ada dalam teks. TfidfVectorizer memungkinkan kami mengubah data genre film sebelumnya menjadi bentuk numerik yang dapat digunakan untuk  pemodelan berbasis ML.
 Menghitung Cosine Similarity Antar Film dan Membuat DataFrame
 Cosine similarity adalah ukuran yang digunakan untuk mengukur kedekatan antara dua vektor dalam ruang vektor, yang digunakan untuk mengukur kemiripan antara genre film. Ini digunakan untuk menghitung seberapa mirip dua film berdasarkan genre mereka. Fungsi cosine_similarity() menggunakan matriks TF-IDF yang telah dihitung sebelumnya untuk menghitung kemiripan antara semua pasangan film dalam dataset. Matriks TF-IDF berfungsi sebagai representasi numerik genre film, dan fungsi ini menghasilkan matriks cosine similarity yang mengukur tingkat kemiripan antara satu film dengan film lainnya. Dengan menggunakan pandas, matriks cosine similarity yang telah dihitung disusun dalam bentuk DataFrame. Di sini, index=movies_df['title'] dan columns=movies_df['title'] digunakan untuk menetapkan baris dan kolom pada DataFrame berdasarkan judul film yang ada dalam dataset. Cosine similarity dapat digunakan untuk menentukan film mana yang paling mirip berdasarkan genre mereka. Ini juga dapat digunakan untuk membuat sistem rekomendasi film yang menyarankan pengguna film-film serupa berdasarkan preferensi mereka.
+![image](https://github.com/user-attachments/assets/6a27dbee-3c04-4404-9784-5775d659a579)
+
 Sistem Rekomendasi
 Cosine similarity, yang dihitung berdasarkan genre film, digunakan oleh sistem rekomendasi untuk menyarankan film yang mirip dengan film yang diberikan pengguna. Film yang lebih mirip dengan film yang dicari akan memiliki nilai cosine similarity yang lebih tinggi. - Mengecek apakah judul film ada: Pertama, fungsi memeriksa apakah judul film yang diberikan ada dalam dataset. Jika tidak ditemukan, fungsi menampilkan pesan gagal dan mengakhiri proses. Tentukan Judul Film untuk Indeks Film:Indeks film, yang sudah dipetakan dalam variabel indeks, digunakan untuk menentukan posisi film dalam dataset movies_df setelah judul ditemukan. Untuk menghitung Cosine Similarity, Anda harus:Setelah mendapatkan indeks film, fungsi cosine_sim digunakan untuk menghitung cosine similarity antara film yang dipilih dan semua film lainnya. Nilai cosine similarity untuk film yang dipilih dan semua film lainnya diambil oleh cosine_sim[idx]. Menyusun skor Cosine Similarity menurut urutan:Sim_scores berisi indeks film dan pasangan skor yang dihitung berdasarkan cosine similarity. Dengan menggunakan fungsi sorted(), skor diurutkan dari yang tertinggi hingga yang terendah. Fungsi key=lambda x: x[1] menjamin pengurutan berdasarkan nilai cosine similarity, dan reverse=True mengurutkan dari nilai tertinggi. Film yang paling mirip akan mendapatkan nilai yang paling tinggi. Menampilkan Pilihan Film:Setelah skor diurutkan, sistem memilih sepuluh film teratas, yang dianggap sebagai film yang paling mirip, dan menampilkan judul dan genre film tersebut. Baris-baris DataFrame movies_df yang berisi judul dan genre diiterasi dengan fungsi iterrows().  Jika pengguna mencari film "Snow Day (2000)", sistem akan memberikan rekomendasi film yang memiliki genre yang mirip dengan "Snow Day (2000)". Sistem rekomendasi film ini menggunakan cosine similarity untuk menentukan seberapa mirip film berdasarkan genre mereka. Pengguna dapat memasukkan judul film, dan sistem akan memberikan daftar film-film dengan genre serupa, membantu pengguna menemukan film baru yang mungkin mereka sukai. Fungsi ini sangat berguna untuk aplikasi seperti sistem rekomendasi film pada platform streaming.
+![image](https://github.com/user-attachments/assets/f113f602-2fde-42b5-9581-9689728775e5)
 
 
 
@@ -88,6 +97,7 @@ Menghitung Ketepatan: Precision dapat dihitung dengan membagi jumlah rekomendasi
 Menampilkan hasil yang tepat: Dengan menggunakan print(), hasil precision ditampilkan dalam format dua desimal.
 
 Untuk film "Snow Day (2000)", hasil precision adalah 1.00, yang berarti semua film yang direkomendasikan oleh sistem adalah relevan berdasarkan ambang batas 0.5 pada cosine similarity. Sangat bermanfaat untuk melakukan evaluasi dengan ketepatan ini untuk mengetahui seberapa akurat sistem rekomendasi dalam memberikan film yang relevan kepada pengguna. Dengan metrik ini, kami dapat mengetahui bahwa sistem ini sangat efektif dalam merekomendasikan film yang serupa berdasarkan genre jika semua film yang direkomendasikan sesuai dengan film yang dipilih oleh pengguna. Meskipun hasil tepat yang tinggi sangat bagus, sistem ini masih bergantung pada pengaturan ambang batas kemiripan cosine dan hanya memperhitungkan genre. Jika dibandingkan dengan metode lain seperti filtrasi kolaboratif yang mempertimbangkan interaksi pengguna, hal ini dapat membatasi variasi dan relevansi rekomendasi.
+![image](https://github.com/user-attachments/assets/eb26aa02-8912-45f8-b2f6-fa50153367bc)
 
 
 
